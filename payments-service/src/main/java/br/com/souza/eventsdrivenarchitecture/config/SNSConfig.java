@@ -13,8 +13,8 @@ public class SNSConfig {
 
     @Value("${aws.region}")
     private String region;
-    @Value("${aws.sns.processed-payments-topic}")
-    private String processedPaymentsTopicArn;
+    @Value("${aws.sns.processed-orders-topic}")
+    private String processedOrdersTopicArn;
 
     @Bean
     public AmazonSNS amazonSNSBuilder(){
@@ -25,7 +25,7 @@ public class SNSConfig {
     }
 
     @Bean
-    public Topic snsProcessedPaymentsTopicBuilder(){
-        return new Topic().withTopicArn(processedPaymentsTopicArn);
+    public Topic snsProcessedOrdersTopicBuilder(){
+        return new Topic().withTopicArn(processedOrdersTopicArn);
     }
 }

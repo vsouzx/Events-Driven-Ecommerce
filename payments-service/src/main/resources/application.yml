@@ -9,7 +9,7 @@ aws:
   sqs:
     endpoint: https://sqs.us-east-1.amazonaws.com/337328321041/orders-queue
   sns:
-    processed-payments-topic: arn:aws:sns:us-east-1:337328321041:processed-payments-topic
+    processed-orders-topic: arn:aws:sns:us-east-1:337328321041:processed-orders-topic
 
 server:
   port: 8081

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProcessedPaymentsQueueConsumer {
 
-    @SqsListener("processed-payments-queue")
+    @SqsListener("processed-orders-queue")
     public void listen(String message){
         System.out.println(message);
     }

@@ -7,9 +7,11 @@ import br.com.souza.eventsdrivenarchitecture.service.sns.AwsSnsService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class PaymentService {
 
@@ -26,7 +28,13 @@ public class PaymentService {
         JSONObject queueMessage = new JSONObject(message);
         String messageJsonString = queueMessage.getString("Message");
 
-        JSONObject messageObject = new JSONObject(messageJsonString);
+        JSONObject messageObject = null;
+        try {
+            messageObject = new JSONObject(messageJsonString);
+        }catch (Exception e){
+            log.error("Error: ", e);
+            return;
+        }
         String paymentType = messageObject.getString("paymentType");
 
         PaymentHistoric paymentHistoricLog = PaymentHistoric.builder()
