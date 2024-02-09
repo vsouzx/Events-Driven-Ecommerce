@@ -1,4 +1,4 @@
-package br.com.souza.eventsdrivenarchitecture.database.model;
+package br.com.souza.eventsdrivenarchitecture.service.payment;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -13,10 +13,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "payments_historic")
-public class PaymentHistoric {
+public class PaymentHistoricDTO {
 
-    @Id
     private UUID id;
     private UUID orderId;
     private String paymentStatus;

@@ -1,7 +1,5 @@
 package br.com.souza.eventsdrivenarchitecture.service.payment;
 
-import br.com.souza.eventsdrivenarchitecture.database.model.PaymentHistoric;
-import br.com.souza.eventsdrivenarchitecture.database.repository.IPaymentsHistoricRepository;
 import br.com.souza.eventsdrivenarchitecture.enums.ValidPaymentTypeEnum;
 import br.com.souza.eventsdrivenarchitecture.service.sns.AwsSnsService;
 import java.util.Arrays;
@@ -15,12 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentService {
 
-    private final IPaymentsHistoricRepository iPaymentsHistoricRepository;
     private final AwsSnsService awsSnsService;
 
-    public PaymentService(IPaymentsHistoricRepository iPaymentsHistoricRepository,
-                          AwsSnsService awsSnsService) {
-        this.iPaymentsHistoricRepository = iPaymentsHistoricRepository;
+    public PaymentService(AwsSnsService awsSnsService) {
         this.awsSnsService = awsSnsService;
     }
 
@@ -37,13 +32,12 @@ public class PaymentService {
         }
         String paymentType = messageObject.getString("paymentType");
 
-        PaymentHistoric paymentHistoricLog = PaymentHistoric.builder()
+        PaymentHistoricDTO paymentHistoricLog = PaymentHistoricDTO.builder()
                 .id(UUID.randomUUID())
                 .orderId(UUID.fromString(messageObject.getString("id")))
                 .paymentStatus(isValidPaymentType(paymentType) ? PaymentStatusEnum.APPROVED.name() : PaymentStatusEnum.RECUSED.name())
                 .build();
 
-        iPaymentsHistoricRepository.save(paymentHistoricLog);
         awsSnsService.publish(paymentHistoricLog.toString());
     }
 
