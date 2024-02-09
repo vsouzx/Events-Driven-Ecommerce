@@ -1,7 +1,6 @@
 package br.com.souza.eventsdrivenarchitecture.config;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.amazonaws.services.sns.model.Topic;
@@ -10,24 +9,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AWSConfig {
+public class SNSConfig {
 
     @Value("${aws.region}")
     private String region;
-    @Value("${aws.access-key-id}")
-    private String accessKeyId;
-    @Value("${aws.secret-access-key}")
-    private String secretKey;
     @Value("${aws.sns.orders-topic}")
     private String ordersTopicArn;
 
     @Bean
     public AmazonSNS amazonSNSBuilder(){
-        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKeyId, secretKey);
-
-        return AmazonSNSClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+        return AmazonSNSClientBuilder.standard()
+                .withCredentials(new DefaultAWSCredentialsProviderChain())
                 .withRegion(region)
                 .build();
     }

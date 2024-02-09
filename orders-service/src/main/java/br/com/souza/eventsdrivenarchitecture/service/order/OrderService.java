@@ -8,7 +8,7 @@ import br.com.souza.eventsdrivenarchitecture.dto.OrderRequest;
 import br.com.souza.eventsdrivenarchitecture.dto.OrderResponse;
 import br.com.souza.eventsdrivenarchitecture.exceptions.InsufficientStockException;
 import br.com.souza.eventsdrivenarchitecture.exceptions.OrderNotFoundException;
-import br.com.souza.eventsdrivenarchitecture.service.aws.AwsSnsService;
+import br.com.souza.eventsdrivenarchitecture.service.sns.AwsSnsService;
 import br.com.souza.eventsdrivenarchitecture.service.product.ProductService;
 import java.util.List;
 import java.util.UUID;

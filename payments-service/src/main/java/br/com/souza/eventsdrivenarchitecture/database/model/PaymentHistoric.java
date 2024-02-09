@@ -1,36 +1,34 @@
-package br.com.souza.eventsdrivenarchitecture.dto;
+package br.com.souza.eventsdrivenarchitecture.database.model;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class OrderResponse {
+@Document(collection = "payments_historic")
+public class PaymentHistoric {
 
+    @Id
     private UUID id;
-    private Integer quantity;
-    private BigDecimal amount;
-    private LocalDateTime orderTime;
+    private UUID orderId;
     private String paymentStatus;
-    private Product product;
 
     @Override
     public String toString(){
         JSONObject json = new JSONObject();
         json.put("id", id);
-        json.put("quantity", quantity);
-        json.put("amount", amount);
+        json.put("orderId", orderId);
         json.put("paymentStatus", paymentStatus);
-        json.put("product", product.toString());
 
         return json.toString();
     }
+
 }

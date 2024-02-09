@@ -1,4 +1,4 @@
-package br.com.souza.eventsdrivenarchitecture.service.aws;
+package br.com.souza.eventsdrivenarchitecture.service.sns;
 
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.Topic;
@@ -19,7 +19,7 @@ public class AwsSnsService {
     }
 
     public void publish(String message){
-        this.snsClient.publish(ordersTopic.getTopicArn(), message);
-        log.debug("Message published!" + message);
+        snsClient.publish(ordersTopic.getTopicArn(), message);
+        System.out.println("Message published");
     }
 }

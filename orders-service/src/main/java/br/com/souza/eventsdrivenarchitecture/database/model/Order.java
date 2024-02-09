@@ -27,6 +27,7 @@ public class Order {
     private BigDecimal amount;
     private LocalDateTime orderTime;
     private String paymentStatus;
+    private String paymentType;
 
     public Order(OrderRequest request, Product product){
         this.id = UUID.randomUUID();
@@ -35,6 +36,7 @@ public class Order {
         this.amount = product.getPrice().multiply(new BigDecimal(request.getQuantity()));
         this.orderTime = LocalDateTime.now();
         this.paymentStatus = PaymentStatusEnum.PENDING.name().toUpperCase();
+        this.paymentType = request.getPaymentType().name().toUpperCase();
     }
 
     @Override
@@ -44,6 +46,7 @@ public class Order {
         json.put("productId", productId);
         json.put("quantity", quantity);
         json.put("amount", amount);
+        json.put("paymentType", paymentType);
         json.put("paymentStatus", paymentStatus);
         json.put("orderTime", orderTime);
 

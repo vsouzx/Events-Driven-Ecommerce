@@ -23,6 +23,7 @@ public class OrderResponse {
     private BigDecimal amount;
     private LocalDateTime orderTime;
     private String paymentStatus;
+    private String paymentType;
     private Product product;
 
     public OrderResponse(Order order, IProductRepository iProductRepository){
@@ -30,6 +31,8 @@ public class OrderResponse {
         this.quantity = order.getQuantity();
         this.amount = order.getAmount();
         this.orderTime = order.getOrderTime();
+        this.paymentStatus = order.getPaymentStatus();
+        this.paymentType = order.getPaymentType();
         this.product = iProductRepository.findById(order.getProductId())
                 .orElse(null);
     }
@@ -42,6 +45,7 @@ public class OrderResponse {
         json.put("amount", amount);
         json.put("orderTime", orderTime);
         json.put("paymentStatus", paymentStatus);
+        json.put("paymentType", paymentType);
         json.put("product", product.toString());
 
         return json.toString();
