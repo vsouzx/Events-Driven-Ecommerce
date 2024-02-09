@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost
+      database: ecommerce
+
+aws:
+  region: us-east-1
+  access-key-id: AKIAU5CSVWIIS2HWAK5B
+  secret-access-key: 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
+  sns:
+    orders-topic: arn:aws:sns:us-east-1:337328321041:orders-topic

@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost
+      database: payments
+
+aws:
+  sqs:
+    endpoint: https://sqs.us-east-1.amazonaws.com/337328321041/orders-queue
+
+server:
+  port: 8081
