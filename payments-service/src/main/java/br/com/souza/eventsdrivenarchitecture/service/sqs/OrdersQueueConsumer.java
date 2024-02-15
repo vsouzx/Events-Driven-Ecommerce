@@ -14,8 +14,7 @@ public class OrdersQueueConsumer {
     }
 
     @SqsListener("orders-queue")
-    public void listen(String message){
-        System.out.println(message);
+    public void listen(String message) throws Exception{
         paymentService.validateOrderPayment(message);
     }
 }

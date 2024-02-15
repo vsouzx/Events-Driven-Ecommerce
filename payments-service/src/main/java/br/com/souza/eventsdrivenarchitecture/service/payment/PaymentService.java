@@ -19,7 +19,10 @@ public class PaymentService {
         this.awsSnsService = awsSnsService;
     }
 
-    public void validateOrderPayment(String message){
+    public void validateOrderPayment(String message) throws Exception{
+        System.out.println("Processando tipo de pagamento do pedido...");
+        Thread.sleep(10000);
+
         JSONObject queueMessage = new JSONObject(message);
         String messageJsonString = queueMessage.getString("Message");
 
@@ -33,7 +36,6 @@ public class PaymentService {
         String paymentType = messageObject.getString("paymentType");
 
         PaymentHistoricDTO paymentHistoricLog = PaymentHistoricDTO.builder()
-                .id(UUID.randomUUID())
                 .orderId(UUID.fromString(messageObject.getString("id")))
                 .paymentStatus(isValidPaymentType(paymentType) ? PaymentStatusEnum.APPROVED.name() : PaymentStatusEnum.RECUSED.name())
                 .build();

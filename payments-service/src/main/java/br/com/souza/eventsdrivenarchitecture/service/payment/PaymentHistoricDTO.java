@@ -15,14 +15,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 public class PaymentHistoricDTO {
 
-    private UUID id;
     private UUID orderId;
     private String paymentStatus;
 
     @Override
     public String toString(){
         JSONObject json = new JSONObject();
-        json.put("id", id);
         json.put("orderId", orderId);
         json.put("paymentStatus", paymentStatus);
 

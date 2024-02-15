@@ -10,6 +10,7 @@ import br.com.souza.eventsdrivenarchitecture.exceptions.InsufficientStockExcepti
 import br.com.souza.eventsdrivenarchitecture.exceptions.OrderNotFoundException;
 import br.com.souza.eventsdrivenarchitecture.service.sns.AwsSnsService;
 import br.com.souza.eventsdrivenarchitecture.service.product.ProductService;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,7 @@ public class OrderService {
     public List<OrderResponse> getAllOrders() {
         return iOrderRepository.findAll().stream()
                 .map(o -> new OrderResponse(o, iProductRepository))
+                .sorted(Comparator.comparing(OrderResponse::getOrderTime).reversed())
                 .toList();
     }
 
