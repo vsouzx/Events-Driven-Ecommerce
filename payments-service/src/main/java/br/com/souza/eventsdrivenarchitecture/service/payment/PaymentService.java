@@ -21,7 +21,6 @@ public class PaymentService {
 
     public void validateOrderPayment(String message) throws Exception{
         System.out.println("Processando tipo de pagamento do pedido...");
-        Thread.sleep(10000);
 
         JSONObject queueMessage = new JSONObject(message);
         String messageJsonString = queueMessage.getString("Message");

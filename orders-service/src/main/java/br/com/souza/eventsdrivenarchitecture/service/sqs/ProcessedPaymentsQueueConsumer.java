@@ -19,7 +19,7 @@ public class ProcessedPaymentsQueueConsumer {
 
     @SqsListener("processed-orders-queue")
     public void listen(String message) throws Exception{
-        System.out.println(message);
+        System.out.println("Payment processed");
         JSONObject queueMessage = new JSONObject(message);
         String messageJsonString = queueMessage.getString("Message");
 

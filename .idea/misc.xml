@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/orders-service/pom.xml" />
         <option value="$PROJECT_DIR$/payments-service/pom.xml" />
+        <option value="$PROJECT_DIR$/payments-historic-lambda/pom.xml" />
       </list>
     </option>
   </component>
